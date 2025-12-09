@@ -32,4 +32,4 @@ SCROLL_PAUSE_TIME = 2  # seconds between scrolls
 MAX_SCROLL_ATTEMPTS = 10
 
 # Browser settings
-USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"

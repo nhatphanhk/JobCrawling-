@@ -48,7 +48,10 @@ class FacebookJobCrawler:
         chrome_options.add_argument("--no-sandbox")
         chrome_options.add_argument("--disable-dev-shm-usage")
         chrome_options.add_argument("--disable-blink-features=AutomationControlled")
-        chrome_options.add_argument("--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36")
+        
+        # Import config to use the configured user agent
+        import config
+        chrome_options.add_argument(f"--user-agent={config.USER_AGENT}")
         
         try:
             service = Service(ChromeDriverManager().install())
@@ -133,9 +136,12 @@ class FacebookJobCrawler:
             # This is a template that demonstrates the approach
             self.logger.info("Parsing job listings...")
             
-            # Example: Find all job-related elements
-            # These selectors are placeholders and need to be updated based on 
-            # Facebook's actual HTML structure
+            # IMPORTANT: Facebook's HTML structure changes frequently
+            # The following selectors are intentionally generic as a starting template
+            # Users should inspect Facebook's current HTML and update these selectors
+            # to target specific job posting elements (e.g., divs with specific classes,
+            # data attributes, or aria-labels that Facebook uses for job listings)
+            self.logger.warning("Using generic selectors - customize these for better results")
             job_elements = soup.find_all(['a', 'div'], limit=max_jobs)
             
             self.logger.info(f"Found {len(job_elements)} potential job elements")

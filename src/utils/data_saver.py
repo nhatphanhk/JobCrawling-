@@ -8,6 +8,7 @@ import pandas as pd
 from pathlib import Path
 from typing import List
 from datetime import datetime
+from .logger import setup_logger
 
 
 class DataSaver:
@@ -22,6 +23,7 @@ class DataSaver:
         """
         self.output_dir = Path(output_dir)
         self.output_dir.mkdir(exist_ok=True)
+        self.logger = setup_logger()
     
     def save_to_csv(self, jobs: List[dict], filename: str = None):
         """
@@ -32,7 +34,7 @@ class DataSaver:
             filename: Output filename (without extension)
         """
         if not jobs:
-            print("No jobs to save")
+            self.logger.warning("No jobs to save")
             return
         
         if filename is None:
@@ -42,7 +44,7 @@ class DataSaver:
         
         df = pd.DataFrame(jobs)
         df.to_csv(filepath, index=False, encoding='utf-8')
-        print(f"Saved {len(jobs)} jobs to {filepath}")
+        self.logger.info(f"Saved {len(jobs)} jobs to {filepath}")
     
     def save_to_json(self, jobs: List[dict], filename: str = None):
         """
@@ -53,7 +55,7 @@ class DataSaver:
             filename: Output filename (without extension)
         """
         if not jobs:
-            print("No jobs to save")
+            self.logger.warning("No jobs to save")
             return
         
         if filename is None:
@@ -64,7 +66,7 @@ class DataSaver:
         with open(filepath, 'w', encoding='utf-8') as f:
             json.dump(jobs, f, indent=2, ensure_ascii=False)
         
-        print(f"Saved {len(jobs)} jobs to {filepath}")
+        self.logger.info(f"Saved {len(jobs)} jobs to {filepath}")
     
     def save_to_excel(self, jobs: List[dict], filename: str = None):
         """
@@ -75,7 +77,7 @@ class DataSaver:
             filename: Output filename (without extension)
         """
         if not jobs:
-            print("No jobs to save")
+            self.logger.warning("No jobs to save")
             return
         
         if filename is None:
@@ -85,7 +87,7 @@ class DataSaver:
         
         df = pd.DataFrame(jobs)
         df.to_excel(filepath, index=False, engine='openpyxl')
-        print(f"Saved {len(jobs)} jobs to {filepath}")
+        self.logger.info(f"Saved {len(jobs)} jobs to {filepath}")
     
     def save(self, jobs: List[dict], format: str = "csv", filename: str = None):
         """
