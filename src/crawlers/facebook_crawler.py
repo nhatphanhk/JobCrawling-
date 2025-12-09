@@ -14,6 +14,7 @@ from selenium.common.exceptions import TimeoutException, NoSuchElementException
 from webdriver_manager.chrome import ChromeDriverManager
 from bs4 import BeautifulSoup
 
+import config
 from ..models.job_model import Job
 from ..utils.logger import setup_logger
 
@@ -48,9 +49,6 @@ class FacebookJobCrawler:
         chrome_options.add_argument("--no-sandbox")
         chrome_options.add_argument("--disable-dev-shm-usage")
         chrome_options.add_argument("--disable-blink-features=AutomationControlled")
-        
-        # Import config to use the configured user agent
-        import config
         chrome_options.add_argument(f"--user-agent={config.USER_AGENT}")
         
         try:

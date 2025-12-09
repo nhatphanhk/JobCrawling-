@@ -39,11 +39,13 @@ setup(
     ],
     python_requires=">=3.8",
     install_requires=requirements,
-    entry_points={
-        "console_scripts": [
-            "facebook-job-crawler=main:main",
-        ],
-    },
+    # Entry points commented out - main.py is not in a package structure
+    # Users should run: python main.py
+    # entry_points={
+    #     "console_scripts": [
+    #         "facebook-job-crawler=main:main",
+    #     ],
+    # },
     keywords="facebook jobs crawler scraper automation selenium",
     project_urls={
         "Bug Reports": "https://github.com/nhatphanhk/JobCrawling-/issues",
